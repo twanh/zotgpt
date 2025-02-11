@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Collections</h1>
+<div class="list-group">
+    {% for collection in collections %}
+    <div class="list-group-item">
+        {% if collection.subcollections %}
+        <div class="d-block" data-bs-toggle="collapse" href="#collapse{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapse{{ loop.index }}">
+            <strong>{{ collection['name'] }}</strong>
+        </div>
+        {% else %}
+        <div class="d-block">
+            <strong><a href="{{ url_for('zotero.collection_items', collection_key=collection['key']) }}">{{ collection['name'] }}</a></strong>
+        </div>
+        {% endif %}
+        <div class="collapse ms-3" id="collapse{{ loop.index }}">
+            <div class="list-group">
+                {% for subcollection in collection.subcollections %}
+                <div class="list-group-item">
+                    <strong><a href="{{ url_for('zotero.collection_items', collection_key=subcollection['key']) }}">{{ subcollection['name'] }}</a></strong>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

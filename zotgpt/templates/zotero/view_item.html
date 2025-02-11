@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ item.title }}</h1>
+{% if content_type == 'text' %}
+    <div>
+        <p>{{ item.note }}</p>
+    </div>
+{% elif content_type == 'pdf' %}
+    <div>
+        <embed src="{{ item.url }}" type="application/pdf" width="100%" height="600px" />
+    </div>
+{% endif %}
+{% endblock %}

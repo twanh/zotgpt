@@ -69,3 +69,5 @@ Thumbs.db
 
 # Pyright
 pyrightconfig.json
+.aider*
+.env
